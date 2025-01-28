@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-
-const salt = bcrypt.genSaltSync(10);
+const saltRounds = +process.env.SALT_ROUNDS;
+const salt = bcrypt.genSaltSync(saltRounds);
 
 const hashPassword = (plainPassword) => {
   return bcrypt.hashSync(plainPassword, salt);
