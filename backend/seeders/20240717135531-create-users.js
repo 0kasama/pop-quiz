@@ -1,10 +1,10 @@
 'use strict';
 
-const { hashPassword } = require("../libs/bcrypt.js");
+const { hashPassword } = require('../libs/bcrypt.js');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -13,14 +13,31 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
+     */
     await queryInterface.bulkInsert(
-      "users",
+      'users',
       [
         {
-          name: "Developer 1",
-          email: "dev1@mail.com",
-          password: hashPassword("dev1"),
+          name: 'Developer 1',
+          email: 'dev1@mail.com',
+          password: hashPassword('dev123'),
+          role: 'admin',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'teacher 1',
+          email: 'teacher1@mail.com',
+          password: hashPassword('teacher123'),
+          role: 'teacher',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'student 1',
+          email: 'student1@mail.com',
+          password: hashPassword('user123'),
+          role: 'user',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -29,13 +46,13 @@ module.exports = {
     );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("users", null, {});
+    await queryInterface.bulkDelete('users', null, {});
   },
 };

@@ -5,8 +5,7 @@ const authentication = async (req, res, next) => {
   try {
     if (req.headers.authorization) {
       const accessToken = req.headers.authorization.split(" ")[1];
-
-      const { id, name, email } = verifyToken(accessToken);
+      const { id, email } = verifyToken(accessToken);
 
       const user = await users.findOne({
         where: { id },
@@ -16,6 +15,7 @@ const authentication = async (req, res, next) => {
         req.loggedUser = {
           id: user.id,
           email: user.email,
+          role: user.role
         };
         return next();
       } else {
@@ -32,16 +32,36 @@ const authentication = async (req, res, next) => {
   }
 };
 
-const authorization = async (req, res, next) => {
-  try {
-    if (req.loggedUser) {
-      return next();
-    } else {
-      throw { name: "Unauthorized", message: "User not authorized" };
+const authorization = (roles = []) => {
+  return async (req, res, next) => {
+    try {
+      if (!req.loggedUser) {
+        throw { name: "Unauthorized", message: "User not authorized" };
+      }
+
+      if (roles.length === 0) {
+        return next();
+      }
+
+      if (roles.includes(req.loggedUser.role)) {
+        return next();
+      }
+
+      throw { name: "Unauthorized", message: "User Doesn't have permissions" };
+    } catch (err) {
+      next(err);
     }
-  } catch (err) {
-    next(err);
-  }
+  };
 };
 
-module.exports = { authentication, authorization };
+const isAdmin = authorization(['admin']);
+const isTeacher = authorization(['admin', 'teacher']);
+const isUser = authorization(['admin', 'teacher', 'user']);
+
+module.exports = { 
+  authentication, 
+  authorization,
+  isAdmin,
+  isTeacher,
+  isUser
+};
