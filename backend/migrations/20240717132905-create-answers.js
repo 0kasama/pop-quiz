@@ -7,35 +7,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      questionId: {
+      question_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "questions",
-          key: "id"
+          model: 'questions',
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       answer: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
-      isCorrect: {
+      is_correct: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('answers');
-  }
+  },
 };
