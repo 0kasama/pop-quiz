@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -11,78 +11,78 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
+     */
     await queryInterface.bulkInsert(
-      "answers",
+      'answers',
       [
         {
-          questionId: 1,
-          answer: "Answer 1-1",
-          isCorrect: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 1,
+          answer: 'Answer 1-1',
+          is_correct: true,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 1,
-          answer: "Answer 1-2",
-          isCorrect: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 1,
+          answer: 'Answer 1-2',
+          is_correct: false,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 2,
-          answer: "Answer 1-1",
-          isCorrect: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 2,
+          answer: 'Answer 1-1',
+          is_correct: true,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 2,
-          answer: "Answer 1-2",
-          isCorrect: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 2,
+          answer: 'Answer 1-2',
+          is_correct: false,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 3,
-          answer: "Answer 2-1",
-          isCorrect: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 3,
+          answer: 'Answer 2-1',
+          is_correct: true,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 3,
-          answer: "Answer 2-2",
-          isCorrect: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 3,
+          answer: 'Answer 2-2',
+          is_correct: false,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 4,
-          answer: "Answer 2-1",
-          isCorrect: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 4,
+          answer: 'Answer 2-1',
+          is_correct: true,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
         {
-          questionId: 4,
-          answer: "Answer 2-2",
-          isCorrect: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          question_id: 4,
+          answer: 'Answer 2-2',
+          is_correct: false,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
       ],
       {}
     );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("answers", null, {});
+    await queryInterface.bulkDelete('answers', null, {});
   },
 };
