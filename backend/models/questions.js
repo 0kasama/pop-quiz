@@ -10,21 +10,23 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       questions.belongsTo(models.quizzes, {
-        foreignKey: "quizId",
+        foreignKey: "quiz_id",
       });
 
       questions.hasMany(models.answers, {
-        foreignKey: "questionId",
+        foreignKey: "question_id",
       });
     }
   }
   questions.init(
     {
-      quizId: DataTypes.INTEGER,
+      quiz_id: DataTypes.INTEGER,
       question: DataTypes.TEXT,
     },
     {
       sequelize,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
       modelName: "questions",
       timestamps: true,
     }

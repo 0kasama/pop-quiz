@@ -17,11 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   answers.init({
-    questionId: DataTypes.INTEGER,
+    question_id: DataTypes.INTEGER,
     answer: DataTypes.TEXT,
-    isCorrect: DataTypes.BOOLEAN
+    is_correct: DataTypes.BOOLEAN
   }, {
     sequelize,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     modelName: 'answers',
     timestamps: true
   });

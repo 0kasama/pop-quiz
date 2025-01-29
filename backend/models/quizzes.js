@@ -12,16 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       quizzes.belongsTo(models.users, {
-        foreignKey: "userId"
+        foreignKey: "user_id"
       })
     }
   }
   quizzes.init({
-    userId: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
     title: DataTypes.STRING,
     slug: DataTypes.STRING,
   }, {
     sequelize,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     modelName: 'quizzes',
     timestamps: true
   });

@@ -12,20 +12,22 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       scores.belongsTo(models.users, {
-        foreignKey: "userId"
+        foreignKey: "user_id"
       })
 
       scores.belongsTo(models.quizzes, {
-        foreignKey: "quizId"
+        foreignKey: "quiz_id"
       })
     }
   }
   scores.init({
-    userId: DataTypes.INTEGER,
-    quizId: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
+    quiz_id: DataTypes.INTEGER,
     score: DataTypes.INTEGER
   }, {
     sequelize,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     modelName: 'scores',
     timestamps: true
   });
