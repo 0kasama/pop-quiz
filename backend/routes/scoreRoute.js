@@ -1,9 +1,12 @@
-const router = require("express").Router();
-const scoreController = require("../controllers/scoreController");
+const router = require('express').Router();
+const scoreController = require('../controllers/scoreController');
+const { isUser, isTeacher } = require('../middlewares/auth');
 
-router.get("/", scoreController.findAll);
-router.get("/:id", scoreController.findOne);
-router.post("/", scoreController.create);
-router.delete("/:id", scoreController.destroy);
+router.use(isUser);
+router.get('/', scoreController.findAll);
+router.get('/:id', scoreController.findOne);
+router.post('/', scoreController.create);
+router.use(isTeacher);
+router.delete('/:id', scoreController.destroy);
 
 module.exports = router;
